@@ -30,4 +30,10 @@ class Main():
 		
 		for task in tasks['items']:
 			print task['title']
-		
+
+	def addTask(self, title, notes):
+		task = {
+			'title': title,
+			'notes': notes,
+		}
+		result = _service.tasks().insert(tasklist=self.getTasklistId(), body=task).execute()

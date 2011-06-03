@@ -3,7 +3,9 @@
 # vim:fileencoding=utf8
 # gflags is python 2.x only *sigh*
 
-from Main import Main
+from CLI import BasicCLI
+
+BasicCLI()
 
 #Main().tasklist()
-Main().homework()
+#Main().homework()

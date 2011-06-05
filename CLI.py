@@ -19,6 +19,10 @@ class BasicCLI():
 			Main().homework()
 		elif self.luser_input.startswith("add "):
 			self.interface_add()
+		elif self.luser_input.startswith("show "):
+			self.interface_show()
+		elif self.luser_input == "list":
+			self.interface_list()
 		elif self.luser_input == "exit":
 			sys.exit()
 		else:
@@ -33,3 +37,11 @@ class BasicCLI():
 			task_add_notes = task_add_data[1]
 
 		Main().addTask(task_add_title, task_add_notes)
+
+	def interface_show(self):
+		task_show_input = self.luser_input[5:]
+
+		Main().showTask(task_show_input)
+
+	def interface_list(self):
+		Main().listTasks()

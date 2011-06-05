@@ -25,6 +25,16 @@ class Main():
 			result = _service.tasklists().insert(body=tasklist).execute()
 			return result['id']
 
+	def getTaskId(self, title):
+		tasklists = _tasklists
+
+		for tasklist in tasklists['items']:
+			if tasklist['title'] == title:
+				return tasklist['id']
+				break
+			else:
+				return 0
+ 
 	def homework(self):
 		tasks = _service.tasks().list(tasklist=self.getTasklistId()).execute()
 		
@@ -37,3 +47,17 @@ class Main():
 			'notes': notes,
 		}
 		result = _service.tasks().insert(tasklist=self.getTasklistId(), body=task).execute()
+
+	def listTasks(self):
+		tasks = _service.tasks().list(tasklist=self.getTasklistId()).execute()
+		return tasks
+#		for task in tasks['items']:
+#			print task['title']
+	def showTask(self, title):
+		taskId = self.getTaskId(title)
+		if taskId == 0:
+			return "Invalid Task ID"
+		task = _service.tasks().get(tasklist=self.getTasklistId(), task=taskId).execute()
+		return task['title']+"\n"+task['notes̈́']
+		#print task['title']
+		#print task['notes']		

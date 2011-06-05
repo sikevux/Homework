@@ -6,9 +6,8 @@ from Main import Main
 import urwid
 urwid.set_encoding("UTF-8")
 welcome_message = urwid.Edit("Sikevux's awesome homework thingey stuff\n-> ")
-def interface_add(self):
-	task_add_input = self.luser_input[4:]
-	task_add_data = task_add_input.split("::")
+def interface_add(luser_input):
+	task_add_data = luser_input.split("::")
 	task_add_notes = ""
 	task_add_title = task_add_data[0]
 	if len(task_add_data) >= 2:
@@ -34,7 +33,7 @@ def new_action(luser_input):
 	if luser_input == "exit":
 		raise urwid.ExitMainLoop()
 	elif luser_input.startswith("add "):
-		interface_add()
+		return urwid.Text((interface_add(luser_input[4:])))
 	elif luser_input.startswith("show "):
 		return urwid.Text((interface_show(luser_input[5:])))
 	elif luser_input == "list":

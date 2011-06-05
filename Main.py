@@ -27,13 +27,11 @@ class Main():
 
 	def getTaskId(self, title):
 		tasklists = _tasklists
-
-		for tasklist in tasklists['items']:
-			if tasklist['title'] == title:
-				return tasklist['id']
-				break
-			else:
-				return 0
+		tasks = _service.tasks().list(tasklist=self.getTasklistId()).execute()
+		for task in tasks['items']:
+			if task['title'] == title:
+				return task['id']
+		return 0
  
 	def homework(self):
 		tasks = _service.tasks().list(tasklist=self.getTasklistId()).execute()
@@ -58,6 +56,4 @@ class Main():
 		if taskId == 0:
 			return "Invalid Task ID"
 		task = _service.tasks().get(tasklist=self.getTasklistId(), task=taskId).execute()
-		return task['title']+"\n"+task['notes̈́']
-		#print task['title']
-		#print task['notes']		
+		return "Task: " + task['title'] + ":\nNotes: " + task['notes']
